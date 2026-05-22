@@ -1,0 +1,11 @@
+# Ignore build output
+build/
+*.o
+*.exe
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore OS-specific info
+.DS_Store
+Thumbs.db
