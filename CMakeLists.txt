@@ -10,4 +10,5 @@ include_directories(include)
 # Add executable target
 add_executable(parser
     src/main.c
+    src/parser.c
 )
