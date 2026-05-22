@@ -2,6 +2,7 @@
 build/
 *.o
 *.exe
+Testing/
 
 # Ignore VS Code settings
 .vscode/

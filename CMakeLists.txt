@@ -12,3 +12,13 @@ add_executable(parser
     src/main.c
     src/parser.c
 )
+
+# Add test executable target
+add_executable(test_parser
+    tests/test_parser.c
+    src/parser.c
+)
+
+# support for cTest
+enable_testing()
+add_test(NAME ParserTests COMMAND test_parser)

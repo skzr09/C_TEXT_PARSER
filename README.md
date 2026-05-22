@@ -10,8 +10,12 @@ C_TEXT_PARSER
 |       |-- parser.c
 |
 |---- build/          # compiled files
-|
 |---- data/
+|       |-- sample.txt
+|       |-- empty.txt
+|
+|---- tests/
+|       |-- test_parser.c
 |
 |---- include/
 |       |-- parser.h
