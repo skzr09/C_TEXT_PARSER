@@ -3,6 +3,49 @@
 #include "parser.h"
 #include "logger.h"
 
+
+/* Tradeoff
+ *  Having separate functions for counting lines, words, and characters is
+ *  cleaner and more modular but it would require multiple passes through the file
+ *  (one for each count - each function has a WHILE), which is inefficient.
+ *
+ *  Design choice: modularity over performance
+ */
+
+// count lines in file
+int count_lines(FILE *fp) {
+    int lines = 0;
+    int c;
+    while ((c = fgetc(fp)) != EOF) {
+        if (c == '\n') lines++;
+    }
+    return lines;
+}
+
+// count words in file
+int count_words(FILE *fp) {
+    int words = 0;
+    int c = 0;
+    int in_word = 0; // flag to track if we're currently in a word
+
+    while ((c = fgetc(fp)) != EOF) {
+        if (isspace(c)) {
+            in_word = 0;
+        } else if (!in_word) {
+            in_word = 1;
+            words++;
+        }
+    }
+    return words;
+}
+
+// count characters in file
+int count_chars(FILE *fp) {
+    int chars = 0;
+    while (fgetc(fp) != EOF) chars++;
+    return chars;
+}
+
 /**
  * Parses a text file and counts lines, words, and characters.
  *
@@ -23,28 +66,13 @@ ParseResult parse_file(const char *filename) {
     }
     log_message(LOG_INFO, "Parsing file");
 
-    int c, in_word = 0;
+    result.line_count = count_lines(fp);
 
-    while ((c = fgetc(fp)) != EOF) {
-        // fgetc returns int (next byte from file -> unsigned char -> integer)
-        // c holds the ASCII code of the character
-        // e.g., 'A' → 65, '\n' → 10
+    rewind(fp); // reset file pointer to beginning
+    result.word_count = count_words(fp);
 
-        result.char_count++;
-
-        if (c == '\n') {
-            result.line_count++;
-        }
-
-        if (isspace(c)) {
-            in_word = 0;
-        } else {
-            if (!in_word) {
-                result.word_count++;
-                in_word = 1;
-            }
-        }
-    }
+    rewind(fp);
+    result.char_count = count_chars(fp);
 
     // Check if file is empty
     if (result.char_count == 0) {

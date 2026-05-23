@@ -21,4 +21,8 @@ typedef struct {
 // parse file
 ParseResult parse_file(const char *filename);
 
+int count_lines(FILE *fp);
+int count_words(FILE *fp);
+int count_chars(FILE *fp);
+
 #endif // PARSER_H
