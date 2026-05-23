@@ -1,3 +1,8 @@
+/**
+ * @file logger.h
+ * @brief Simple logging utility with severity levels.
+*/
+
 #ifndef LOGGER_H
 #define LOGGER_H
 

@@ -1,3 +1,8 @@
+/**
+ * @file parser.h
+ * @brief Text parsing utilities for counting lines, words, and characters.
+ */
+
 #ifndef PARSER_H
 #define PARSER_H
 
