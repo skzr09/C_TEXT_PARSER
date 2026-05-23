@@ -2,6 +2,15 @@
 
 A simple C project that parses text files, counts lines/words, and demonstrates structured project organization with logging, modularization, and testing.
 
+## Covers
+Project covers basics:
+
+- Structure
+- Documentation
+- Cmake
+- Logging
+- CTest
+
 ## Structure
 ```
 C_TEXT_PARSER
