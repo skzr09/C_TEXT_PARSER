@@ -11,12 +11,14 @@ include_directories(include)
 add_executable(parser
     src/main.c
     src/parser.c
+    src/logger.c
 )
 
 # Add test executable target
 add_executable(test_parser
     tests/test_parser.c
     src/parser.c
+    src/logger.c
 )
 
 # support for cTest

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "parser.h"
+#include "logger.h"
 
 int main(int argc, char *argv[]) {
 
@@ -15,20 +16,9 @@ int main(int argc, char *argv[]) {
     ParseResult result = parse_file(filename);
 
     // Error
-    switch (result.error) {
-        case PARSE_OK:
-            printf("Lines: %d\nWords: %d\nChars: %d\n",
-                result.line_count, result.word_count, result.char_count);
-            break;
-        case PARSE_ERR_OPEN:
-            fprintf(stderr, "Error: cannot open file\n");
-            break;
-        case PARSE_ERR_EMPTY:
-            fprintf(stderr, "Error: file is empty\n");
-            break;
-        case PARSE_ERR_CORRUPT:
-            fprintf(stderr, "Error: file corrupted or read error\n");
-            break;
+    if (result.error != PARSE_OK) {
+        // Error messages are already logged by parse_file, exit here
+        return 1;
     }
 
     // Success
